@@ -4,7 +4,7 @@ import time
 from django.test import LiveServerTestCase
 from selenium.common.exceptions import WebDriverException
 
-MAX_WAIT = 10.
+MAX_WAIT = 2
 
 # Edith has heard about a cool new online to-do app. She goes
 # to check out its homepage
