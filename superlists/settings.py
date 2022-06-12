@@ -31,7 +31,7 @@ if 'DJANGO_DEBUG_FALSE' in os.environ:
     ALLOWED_HOSTS = [os.environ['SITENAME']]
 else:
     DEBUG = True
-    DEBUG = 'insecure-key-for-dev'
+    SECRET_KEY = 'insecure-key-for-dev'
     ALLOWED_HOSTS = []
 # Application definition
 
