@@ -4,7 +4,7 @@ import time
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium.common.exceptions import WebDriverException
 
-MAX_WAIT = 2
+MAX_WAIT = 4
 
 
 class FunctionalTest(StaticLiveServerTestCase):
@@ -18,6 +18,16 @@ class FunctionalTest(StaticLiveServerTestCase):
     def tearDown(self):
         self.browser.quit()
 
+    def wait_for(self, fn):
+        start_time = time.time()
+        while True:
+            try:
+                return fn()
+            except (AssertionError, WebDriverException) as e:
+                if time.time() - start_time > MAX_WAIT:
+                    raise e
+                time.sleep(0.1)
+
     def wait_for_row_in_list_table(self, row_text):
         start_time = time.time()
         while True:
@@ -30,3 +40,5 @@ class FunctionalTest(StaticLiveServerTestCase):
                 if time.time() - start_time > MAX_WAIT:
                     raise e
                 time.sleep(0.1)
+
+
