@@ -3,6 +3,8 @@ from selenium import webdriver
 import time
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium.common.exceptions import WebDriverException
+from selenium.webdriver.common.by import By
+
 
 MAX_WAIT = 4
 
@@ -32,8 +34,8 @@ class FunctionalTest(StaticLiveServerTestCase):
         start_time = time.time()
         while True:
             try:
-                table = self.browser.find_element_by_id('id_list_table')
-                rows = table.find_elements_by_tag_name('tr')
+                table = self.browser.find_element(By.ID, 'id_list_table')
+                rows = table.find_elements(By.TAG_NAME, 'tr')
                 self.assertIn(row_text, [row.text for row in rows])
                 return
             except (AssertionError, WebDriverException) as e:
@@ -42,4 +44,5 @@ class FunctionalTest(StaticLiveServerTestCase):
                 time.sleep(0.1)
     
     def get_item_input_box(self):
-        return self.browser.find_element_by_id('id_text')
+        # return self.browser.find_element_by_id('id_text')
+        return self.browser.find_element(By.ID, 'id_text')
