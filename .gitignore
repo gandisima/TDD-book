@@ -3,6 +3,5 @@ geckodriver.log
 virtualenv
 __pycache__
 .pyc
-static
 .env
 .DS_Store
